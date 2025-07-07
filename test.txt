@@ -1,0 +1,13 @@
+Cannot convert value to type "System.Management.Automation.LanguagePrimitives+InternalPSCustomObject". Only core types are supported in this language mode.
+At line:39 char:5
++     $chunks += [PSCustomObject]@{ Order = $chunkIndex; Chunk = $hex }
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [], RuntimeException
+    + FullyQualifiedErrorId : ConversionSupportedOnlyToCoreTypes
+ 
+Cannot convert value to type "System.Management.Automation.LanguagePrimitives+InternalPSCustomObject". Only core types are supported in this language mode.
+At line:39 char:5
++     $chunks += [PSCustomObject]@{ Order = $chunkIndex; Chunk = $hex }
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [], RuntimeException
+    + FullyQualifiedErrorId : ConversionSupportedOnlyToCoreTypes
