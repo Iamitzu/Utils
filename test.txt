@@ -11,3 +11,5 @@ At line:39 char:5
 +     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     + CategoryInfo          : InvalidArgument: (:) [], RuntimeException
     + FullyQualifiedErrorId : ConversionSupportedOnlyToCoreTypes
+
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
