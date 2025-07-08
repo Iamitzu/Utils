@@ -13,16 +13,7 @@ At line:39 char:5
     + FullyQualifiedErrorId : ConversionSupportedOnlyToCoreTypes
 
 d1mfrv2mq2v018s9mtd0fqqfemo3sp9wf.oast.live
-curl --request GET \
-  --url http://github.com/ \
-  --header 'Host: xyz.com.d1mfrv2mq2v018s9mtd0fqqfemo3sp9wf.oast.live' 
+curl 'https://github.com/' `
+     -Method GET `
+     -Headers @{ Host = 'xyz.com.d1mfrv2mq2v018s9mtd0fqqfemo3sp9wf.oast.live' }
 
-curl -X GET 'https://github.com/' -H 'Host: xyz.com.d1mfrv2mq2v018s9mtd0fqqfemo3sp9wf.oast.live'
-Invoke-WebRequest : Cannot bind parameter 'Headers'. Cannot convert the "Host: 
-xyz.com.d1mfrv2mq2v018s9mtd0fqqfemo3sp9wf.oast.live" value of type "System.String" to type 
-"System.Collections.IDictionary".
-At line:1 char:38
-+ ... ub.com/' -H 'Host: xyz.com.d1mfrv2mq2v018s9mtd0fqqfemo3sp9wf.oast.liv ...
-+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : InvalidArgument: (:) [Invoke-WebRequest], ParameterBindingException
-    + FullyQualifiedErrorId : CannotConvertArgumentNoMessage,Microsoft.PowerShell.Commands.InvokeWebRequestC 
