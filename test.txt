@@ -12,7 +12,7 @@ At line:39 char:5
     + CategoryInfo          : InvalidArgument: (:) [], RuntimeException
     + FullyQualifiedErrorId : ConversionSupportedOnlyToCoreTypes
 
-d1mfrv2mq2v018s9mtd0fqqfemo3sp9wf.oast.live
+g9nfrenqmlqyh2heu378giu40.canarytokens.com
 curl 'https://github.com/' `
      -Method GET `
      -Headers @{ Host = 'xyz.com.d1mfrv2mq2v018s9mtd0fqqfemo3sp9wf.oast.live' }
