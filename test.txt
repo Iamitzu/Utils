@@ -16,4 +16,5 @@ g9nfrenqmlqyh2heu378giu40.canarytokens.com
 curl 'https://github.com/' `
      -Method GET `
      -Headers @{ Host = 'xyz.com.d1mfrv2mq2v018s9mtd0fqqfemo3sp9wf.oast.live' }
-
+d1nn9iimq2v03l33p0p0h99t7jw3fja6q.enbd.mr4dot.com
+d1nn9iimq2v03l33p0p0h99t7jw3fja6q.enbd.mr4dot.com
